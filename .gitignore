@@ -1,2 +1,7 @@
 **/cs350-project-javadoc-v0.1.zip
 **/cs350-project-javadoc-v0.1
+**/*.iml
+**/.*
+**/bin/
+**/out/
+**/*.eml
