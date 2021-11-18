@@ -46,7 +46,6 @@ public class LoaderFix extends A_Loader {
 	protected Altitude readAltitude() {
 		
 		return null;
-		
 	}
 
 }
