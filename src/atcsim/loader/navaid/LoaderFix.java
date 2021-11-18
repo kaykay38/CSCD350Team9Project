@@ -21,32 +21,7 @@ public class LoaderFix extends A_Loader {
 	}
 
 
-	@Override
-	protected String readID() {
-		
-		return null;
-	}
-
-
-	@Override
-	protected Latitude readLatitude() {
-		
-		return null;
-	}
-
-
-	@Override
-	protected Longitude readLongitude() {
-		
-		return null;
-	}
-
-
-	@Override
-	protected Altitude readAltitude() {
-		
-		return null;
-	}
+	
 	
 
 }
