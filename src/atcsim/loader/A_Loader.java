@@ -20,12 +20,37 @@ public abstract class A_Loader {
 		
 	}
 	
-	protected abstract String readID();
-	protected abstract Latitude readLatitude();
-	protected abstract Longitude readLongitude();
-	protected abstract Altitude readAltitude();
+	protected String readID() {
+		
+		return this.splitString[0];
+	}
 	
+	protected Latitude readLatitude(String[] latitudeArray) {
+		  
+		int degrees = Integer.parseInt(latitudeArray[0]);
+		int minutes = Integer.parseInt(latitudeArray[1]);
+		double seconds = Double.parseDouble(latitudeArray[2]);
+		
+		Latitude latitude = new Latitude(degrees, minutes, seconds);
+		return latitude;
+	}
 	
+	protected Longitude readLongitude(String[] longitudeArray) {
+		
+		int degrees = Integer.parseInt(longitudeArray[0]);
+		int minutes = Integer.parseInt(longitudeArray[1]);
+		double seconds = Double.parseInt(longitudeArray[2]);
+		
+		Longitude longitude = new Longitude(degrees, minutes, seconds);
+		return longitude;
+	}
+	
+	protected Altitude readAltitude(String altitude) {
+		
+		return new Altitude(Double.parseDouble(altitude));
+	}
+	
+		
 	
 	
 }

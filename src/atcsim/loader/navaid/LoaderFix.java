@@ -17,6 +17,9 @@ public class LoaderFix extends A_Loader {
 	
 	public void load(java.util.Scanner scanner) throws java.io.IOException {
 		
+			
+					
+		}
 		
 	}
 
