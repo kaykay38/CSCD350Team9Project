@@ -25,4 +25,6 @@ public abstract class A_Loader {
 	protected abstract Longitude readLongitude();
 	protected abstract Altitude readAltitude();
 	
+	
+	
 }
