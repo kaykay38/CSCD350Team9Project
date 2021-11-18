@@ -20,32 +20,30 @@ public class LoaderILS extends A_Loader {
 		
 	}
 
-
 	@Override
-	protected String readID() {
+	protected String readLatitude() {
 		
 		return null;
 	}
 
 
 	@Override
-	protected Latitude readLatitude() {
+	protected String readLongitude() {
 		
 		return null;
 	}
 
 
 	@Override
-	protected Longitude readLongitude() {
+	protected String readAltitude() {
 		
 		return null;
 	}
 
 
-	@Override
-	protected Altitude readAltitude() {
-		
-		return null;
-	}
+	
+
+
+	
 	
 }

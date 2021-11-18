@@ -43,7 +43,7 @@ public abstract class A_Loader {
 		
 		int degrees = Integer.parseInt(degreeString);
 		int minutes = Integer.parseInt(degreeString);
-		double seconds = Double.parseInt(degreeString);
+		double seconds = Double.parseDouble(degreeString);
 		
 		Longitude longitude = new Longitude(degrees, minutes, seconds);
 		return longitude;
