@@ -25,21 +25,25 @@ public abstract class A_Loader {
 		return this.splitString[0];
 	}
 	
-	protected Latitude readLatitude(String[] latitudeArray) {
+	protected abstract String readLatitude();
+	protected abstract String readLongitude();
+	protected abstract String readAltitude();
+	
+	protected Latitude getLatitude(String degreeString, String minutesString, String secondsString) {
 		  
-		int degrees = Integer.parseInt(latitudeArray[0]);
-		int minutes = Integer.parseInt(latitudeArray[1]);
-		double seconds = Double.parseDouble(latitudeArray[2]);
+		int degrees = Integer.parseInt(degreeString);
+		int minutes = Integer.parseInt(minutesString);
+		double seconds = Double.parseDouble(secondsString);
 		
 		Latitude latitude = new Latitude(degrees, minutes, seconds);
 		return latitude;
 	}
 	
-	protected Longitude readLongitude(String[] longitudeArray) {
+	protected Longitude getLongitude(String degreeString, String minutesString, String secondsString) {
 		
-		int degrees = Integer.parseInt(longitudeArray[0]);
-		int minutes = Integer.parseInt(longitudeArray[1]);
-		double seconds = Double.parseInt(longitudeArray[2]);
+		int degrees = Integer.parseInt(degreeString);
+		int minutes = Integer.parseInt(degreeString);
+		double seconds = Double.parseInt(degreeString);
 		
 		Longitude longitude = new Longitude(degrees, minutes, seconds);
 		return longitude;
