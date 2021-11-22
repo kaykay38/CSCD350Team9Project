@@ -24,24 +24,24 @@ public class LoaderVOR extends A_Loader {
     }
 
     public void load(Scanner scanner) throws IOException {
-        String[] splitStr;
+        String[] splitString;
 
-        while (scanner.hasNextLine()) {
-            splitStr = scanner.nextLine().split("\s*,\s*");    
+        while (scanner.hasNextLine() && (scanner.nextLine().matches("[\\[*\\]]") || scanner.nextLine().isBlank())) {
+            splitString = scanner.nextLine().split("\s*,\s*");
 
-            if (splitStr.length > 0) {
-                for (String str : splitStr) {
+            if (splitString.length > 0) {
+                for (String str : splitString) {
                     str.trim();
                 }
 
-                String id = splitStr[ID];
-                VHFFrequency vhfFrequency = new VHFFrequency(Integer.parseInt(splitStr[VHF_FREQ_MAJ]), Integer.parseInt(splitStr[VHF_FREQ_MIN]));
-                Latitude latitude = readLatitude(splitStr[LAT_DEG],splitStr[LAT_MIN],splitStr[LAT_SEC]);
-                Longitude longitude = readLongitude(splitStr[LON_DEG],splitStr[LON_MIN],splitStr[LON_SEC]);
-                Altitude altitude = readAltitude(splitStr[ALT]);
+                String id = splitString[ID];
+                VHFFrequency vhfFrequency = new VHFFrequency(Integer.parseInt(splitString[VHF_FREQ_MAJ]), Integer.parseInt(splitString[VHF_FREQ_MIN]));
+                Latitude latitude = readLatitude(splitString[LAT_DEG],splitString[LAT_MIN],splitString[LAT_SEC]);
+                Longitude longitude = readLongitude(splitString[LON_DEG],splitString[LON_MIN],splitString[LON_SEC]);
+                Altitude altitude = readAltitude(splitString[ALT]);
                 CoordinateWorld3D postion = new CoordinateWorld3D(latitude, longitude, altitude);
 
-                this.overlay.addNavaid(new ComponentNavaidVOR(id,postion,vhfFrequency));
+                overlay.addNavaid(new ComponentNavaidVOR(id,postion,vhfFrequency));
             }
         }
     }

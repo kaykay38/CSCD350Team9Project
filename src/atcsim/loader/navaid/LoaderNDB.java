@@ -26,7 +26,8 @@ public class LoaderNDB extends A_Loader {
     public void load(Scanner scanner) throws IOException {
         String[] splitString;
 
-        while (scanner.hasNextLine()) {
+        while (scanner.hasNextLine() && (scanner.nextLine().matches("[\\[*\\]]") || scanner.nextLine().isBlank())) {
+
             splitString = scanner.nextLine().split("\s*,\s*");    
 
             if (splitString.length > 0) {
