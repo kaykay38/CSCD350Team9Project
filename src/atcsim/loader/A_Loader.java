@@ -29,8 +29,8 @@ public abstract class A_Loader {
 	protected Longitude readLongitude(String degreeString, String minutesString, String secondsString) {
 		
 		int degrees = Integer.parseInt(degreeString);
-		int minutes = Integer.parseInt(degreeString);
-		double seconds = Double.parseDouble(degreeString);
+		int minutes = Integer.parseInt(minutesString);
+		double seconds = Double.parseDouble(secondsString);
 		
 		return new Longitude(degrees, minutes, seconds);
     }
