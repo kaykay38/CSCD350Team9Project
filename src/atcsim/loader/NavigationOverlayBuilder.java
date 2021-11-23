@@ -4,7 +4,6 @@ import atcsim.graphics.view.navigation.OverlayNavigation;
 import atcsim.loader.navaid.*;
 import atcsim.world.navigation.A_ComponentNavaid;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ public class NavigationOverlayBuilder {
         HashMap navaid = new HashMap<String, A_ComponentNavaid>();
         String id = "1";
         OverlayNavigation overlayNavigation = new OverlayNavigation(id);
-//        fix, NDB, VOR, ILS, and airway
+        // fix, NDB, VOR, ILS, and airway
         LoaderFix loaderFix = new LoaderFix(navaid, overlayNavigation);
         loaderFix.load(scanner);
         LoaderNDB loaderNDB = new LoaderNDB(navaid, overlayNavigation);
@@ -31,7 +30,8 @@ public class NavigationOverlayBuilder {
         loaderILS.load(scanner);
         LoaderAirway loaderAirway = new LoaderAirway(navaid, overlayNavigation);
         loaderAirway.load(scanner);
+        scanner.close();
 
-        return overlayNavigation.getOverlay();
+        return overlayNavigation;
     }
 }

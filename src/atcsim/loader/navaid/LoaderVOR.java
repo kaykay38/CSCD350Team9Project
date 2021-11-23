@@ -24,13 +24,19 @@ public class LoaderVOR extends A_Loader {
     }
 
     public void load(Scanner scanner) throws IOException {
+        String line = scanner.nextLine();
         String[] split;
 
-        while (scanner.hasNextLine() && (scanner.nextLine().matches("[\\[*\\]]") || scanner.nextLine().isBlank())) {
-            split = scanner.nextLine().split("\s*,\s*");
+        while (line.matches("\\[NAVAID:.+") && scanner.hasNextLine()) {
+            line = scanner.nextLine();
+        }
+
+        while (!line.isBlank()) {
+            split = line.split("\\s*,\\s*");
 
             if (split.length >= 9) {
                 String id = split[ID];
+
                 VHFFrequency vhfFrequency = new VHFFrequency(Integer.parseInt(split[VHF_MAJ]), Integer.parseInt(split[VHF_MIN]));
                 Latitude latitude = readLatitude(split[LAT_DEG],split[LAT_MIN],split[LAT_SEC]);
                 Longitude longitude = readLongitude(split[LON_DEG],split[LON_MIN],split[LON_SEC]);
@@ -41,6 +47,11 @@ public class LoaderVOR extends A_Loader {
                 overlay.addNavaid(navaidVOR);
                 navaids.put(id, navaidVOR);
             }
+
+            if(scanner.hasNextLine())
+                line = scanner.nextLine();
+            else
+                line = "";
         }
     }
 

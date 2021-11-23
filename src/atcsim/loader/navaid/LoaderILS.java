@@ -24,47 +24,47 @@ public class LoaderILS extends A_Loader {
 	
 	
 	public void load(java.util.Scanner scanner) throws java.io.IOException {
-		
 		String line = scanner.nextLine();
-		while(!(line.equals("[NAVAID:ILS]")))
+		String[] split;
+
+		while(line.matches("\\[NAVAID:.+") && scanner.hasNextLine())
 			line = scanner.nextLine();
-		
-		String[] splitString;
-		
-		line = scanner.nextLine();
-		while(!(line.isEmpty())) {
-			
-			splitString = line.split(", ");
-			String id = splitString[ID];
-			
-			String[] splitVHF = splitString[VHF].split(",");
+
+		while(!line.isBlank()) {
+			split = line.split(", ");
+
+			String id = split[ID];
+
+			String[] splitVHF = split[VHF].split(",");
 			VHFFrequency frequency = new VHFFrequency(Integer.parseInt(splitVHF[0]), Integer.parseInt(splitVHF[1]));
 			
-			String[] splitLat = splitString[LAT].split(",");
+			String[] splitLat = split[LAT].split(",");
 			Latitude latitude = readLatitude(splitLat[0], splitLat[1], splitLat[2]);
-			String[] splitLon = splitString[LON].split(",");
+			String[] splitLon = split[LON].split(",");
 			Longitude longitude = readLongitude(splitLon[0], splitLon[1], splitLon[2]);
-			Altitude altitude = readAltitude(splitString[ALT]);
+			Altitude altitude = readAltitude(split[ALT]);
 			CoordinateWorld3D position = new CoordinateWorld3D(latitude, longitude, altitude);
 			
-			AngleNavigational azimuth = new AngleNavigational(Double.parseDouble(splitString[AZIMUTH]));
+			AngleNavigational azimuth = new AngleNavigational(Double.parseDouble(split[AZIMUTH]));
 			
-			String[] splitOuter = splitString[OUTER].split(",");
+			String[] splitOuter = split[OUTER].split(",");
 			NavaidILSBeaconDescriptor markerOuter = new NavaidILSBeaconDescriptor(new Distance(Double.parseDouble(splitOuter[0])), readAltitude(splitOuter[1]));
 			
-			String[] splitMiddle = splitString[MIDDLE].split(",");
+			String[] splitMiddle = split[MIDDLE].split(",");
 			NavaidILSBeaconDescriptor markerMiddle = new NavaidILSBeaconDescriptor(new Distance(Double.parseDouble(splitMiddle[0])), readAltitude(splitMiddle[1]));
 			
-			String[] splitInner = splitString[INNER].split(",");
+			String[] splitInner = split[INNER].split(",");
 			NavaidILSBeaconDescriptor markerInner = new NavaidILSBeaconDescriptor(new Distance(Double.parseDouble(splitInner[0])), readAltitude(splitInner[1]));
 			
 			ComponentNavaidILS ils = new ComponentNavaidILS(id, position, azimuth, frequency, markerOuter, markerMiddle, markerInner);
 			
 			overlay.addNavaid(ils);
 			navaids.put(id, ils);
-			
-			line = scanner.nextLine();
-			
+
+			if(scanner.hasNextLine())
+				line = scanner.nextLine();
+			else
+				line = "";
 		}
 		
 	}

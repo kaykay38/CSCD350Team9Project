@@ -26,12 +26,18 @@ public class LoaderAirway extends A_Loader {
 
     public void load(Scanner scanner) throws IOException {
 
-        String[] split = scanner.nextLine().split(",");
         ComponentNavaidAirway componentNavaidAirway;
 
-        while(scanner.hasNextLine() && !split[0].isEmpty()) {
-            split = scanner.nextLine().split("\\s*,\\s*");
-            if(split.length >= 2) {
+        String line = scanner.nextLine();
+        String[] split;
+
+        while (line.matches("\\[NAVAID:.+") && scanner.hasNextLine()) {
+            line = scanner.nextLine();
+        }
+
+        while (!line.isBlank()) {
+            split = line.split("\\s*,\\s*");
+            if(split.length > 2) {
 
                 String id = split[0];
                 String type = split[1];
@@ -76,6 +82,11 @@ public class LoaderAirway extends A_Loader {
                     navaids.put(id, componentNavaidAirway);
                 }
             }
+
+            if(scanner.hasNextLine())
+                line = scanner.nextLine();
+            else
+                line = "";
         }
     }
 }

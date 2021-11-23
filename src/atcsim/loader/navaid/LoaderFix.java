@@ -20,42 +20,44 @@ public class LoaderFix extends A_Loader {
 	
 	
 	public void load(java.util.Scanner scanner) throws java.io.IOException {
-		
+
 		String line = scanner.nextLine();
-		while(!(line.equals("[NAVAID:FIX]")))
+		String[] split;
+
+		while(line.matches("\\[NAVAID:.+"))
 			line = scanner.nextLine();
-		
-		String[] splitString;
-		
-		line = scanner.nextLine();
-		while(!(line.isEmpty())) {
-			
-			splitString = line.split(", ");
-			String id = splitString[ID];
-			String[] splitLat = splitString[LAT].split(",");
+
+		while(!(line.isBlank())) {
+			split = line.split(", ");
+
+			String id = split[ID];
+
+			String[] splitLat = split[LAT].split(",");
 			Latitude latitude = readLatitude(splitLat[0], splitLat[1], splitLat[2]);
 			
-			String[] splitLon = splitString[LON].split(",");
+			String[] splitLon = split[LON].split(",");
 			Longitude longitude = readLongitude(splitLon[0], splitLon[1], splitLon[2]);
 			
-			Altitude altitude = readAltitude(splitString[ALT]);
+			Altitude altitude = readAltitude(split[ALT]);
 			
 			CoordinateWorld3D position = new CoordinateWorld3D(latitude, longitude, altitude);
 			ComponentNavaidFix fix = new ComponentNavaidFix(id, position);
 			
 			this.overlay.addNavaid(fix);
 			this.navaids.put(id, fix);
-			
-			line = scanner.nextLine();
-				
+
+			if(scanner.hasNextLine())
+				line = scanner.nextLine();
+			else
+				line = "";
 		}
-			
-					
+
+
 	}
 
 
-	
-		
+
+
 }
 
 	
