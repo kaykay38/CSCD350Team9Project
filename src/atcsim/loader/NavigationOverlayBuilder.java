@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class NavigationOverlayBuilder {
 
 	public NavigationOverlayBuilder() {
-
 		System.out.println("Using Team 9 NavigationOverlayBuilder.");
     }
 
@@ -23,7 +22,7 @@ public class NavigationOverlayBuilder {
         String id = "1";
         OverlayNavigation overlayNavigation = new OverlayNavigation(id);
         // fix, NDB, VOR, ILS, and airway
-        LoaderFix loaderFix = new LoaderFix(navaid, overlayNavigation);
+        LoaderFix loaderFix = new LoaderFix(navaids, overlayNavigation);
         loaderFix.load(scanner);
         LoaderNDB loaderNDB = new LoaderNDB(navaids, overlayNavigation);
         loaderNDB.load(scanner);
