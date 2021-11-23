@@ -24,25 +24,24 @@ public class LoaderNDB extends A_Loader {
     }
 
     public void load(Scanner scanner) throws IOException {
-        String[] splitString;
+        String[] split;
 
-        while (scanner.hasNextLine() && (scanner.nextLine().matches("[\\[*\\]]") || scanner.nextLine().isBlank())) {
+        while (scanner.hasNextLine() && (scanner.nextLine().isBlank())) {
 
-            splitString = scanner.nextLine().split("\s*,\s*");    
+            split = scanner.nextLine().split("\s*,\s*");
 
-            if (splitString.length > 0) {
-                for (String str : splitString) {
-                    str.trim();
-                }
+            if (split.length > 0) {
 
-                String id = splitString[ID];
-                UHFFrequency uhfFrequency = new UHFFrequency(Integer.parseInt(splitString[UHF_FREQ]));
-                Latitude latitude = readLatitude(splitString[LAT_DEG],splitString[LAT_MIN],splitString[LAT_SEC]);
-                Longitude longitude = readLongitude(splitString[LON_DEG],splitString[LON_MIN],splitString[LON_SEC]);
-                Altitude altitude = readAltitude(splitString[ALT]);
+                String id = split[ID];
+                UHFFrequency uhfFrequency = new UHFFrequency(Integer.parseInt(split[UHF_FREQ]));
+                Latitude latitude = readLatitude(split[LAT_DEG],split[LAT_MIN],split[LAT_SEC]);
+                Longitude longitude = readLongitude(split[LON_DEG],split[LON_MIN],split[LON_SEC]);
+                Altitude altitude = readAltitude(split[ALT]);
                 CoordinateWorld3D postion = new CoordinateWorld3D(latitude, longitude, altitude);
 
-                this.overlay.addNavaid(new ComponentNavaidNDB(id,postion,uhfFrequency));
+                ComponentNavaidNDB navaidNDB = new ComponentNavaidNDB(id,postion,uhfFrequency);
+                overlay.addNavaid(navaidNDB);
+                navaids.put(id, navaidNDB);
             }
         }
     }
