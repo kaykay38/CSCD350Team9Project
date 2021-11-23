@@ -36,58 +36,64 @@ public class LoaderAirway extends A_Loader {
         }
 
         while (!line.isBlank()) {
+
             split = line.split("\\s*,\\s*");
-            if(split.length > 2) {
 
-                String id = split[0];
-                String type = split[1];
 
-                if (type.equalsIgnoreCase("CC")) {
 
-                    Latitude latitude1 = readLatitude(split[2], split[3], split[4]);
-                    Longitude longitude1 = readLongitude(split[5], split[6], split[7]);
-                    Altitude altitude1 = readAltitude(split[8]);
+            String id = split[0];
+            String type = split[1];
 
-                    CoordinateWorld3D position1 = new CoordinateWorld3D(latitude1, longitude1, altitude1);
+            if (type.equalsIgnoreCase("CC")) {
 
-                    Latitude latitude2 = readLatitude(split[9], split[10], split[11]);
-                    Longitude longitude2 = readLongitude(split[12], split[13], split[14]);
-                    Altitude altitude2 = readAltitude(split[15]);
+                Latitude latitude1 = readLatitude(split[2], split[3], split[4]);
+                Longitude longitude1 = readLongitude(split[5], split[6], split[7]);
+                Altitude altitude1 = readAltitude(split[8]);
 
-                    CoordinateWorld3D position2 = new CoordinateWorld3D(latitude2, longitude2, altitude2);
-                    componentNavaidAirway = new ComponentNavaidAirway(id, position1, position2);
-                    overlay.addNavaid(componentNavaidAirway);
-                    navaids.put(id, componentNavaidAirway);
-                }
+                CoordinateWorld3D position1 = new CoordinateWorld3D(latitude1, longitude1, altitude1);
 
-                else if (type.equalsIgnoreCase("NC")) {
-                    String navId1 = split[2];
+                Latitude latitude2 = readLatitude(split[9], split[10], split[11]);
+                Longitude longitude2 = readLongitude(split[12], split[13], split[14]);
+                Altitude altitude2 = readAltitude(split[15]);
 
-                    Latitude latitude = readLatitude(split[3], split[4], split[5]);
-                    Longitude longitude = readLongitude(split[6], split[7], split[8]);
-                    Altitude altitude = readAltitude(split[9]);
+                CoordinateWorld3D position2 = new CoordinateWorld3D(latitude2, longitude2, altitude2);
+                componentNavaidAirway = new ComponentNavaidAirway(id, position1, position2);
 
-                    CoordinateWorld3D position = new CoordinateWorld3D(latitude, longitude, altitude);
-
-                    componentNavaidAirway = new ComponentNavaidAirway(id, navaids.get(navId1), position);
-                    overlay.addNavaid(componentNavaidAirway);
-                    navaids.put(id, componentNavaidAirway);
-                }
-                
-                else if (type.equalsIgnoreCase("NN")) {
-                    String navId1 = split[2];
-                    String navId2 = split[3];
-
-                    componentNavaidAirway = new ComponentNavaidAirway(id, navaids.get(navId1), navaids.get(navId2));
-                    overlay.addNavaid(componentNavaidAirway);
-                    navaids.put(id, componentNavaidAirway);
-                }
+                overlay.addNavaid(componentNavaidAirway);
+                navaids.put(id, componentNavaidAirway);
             }
+
+            else if (type.equalsIgnoreCase("NC")) {
+                String navId1 = split[2];
+
+                Latitude latitude = readLatitude(split[3], split[4], split[5]);
+                Longitude longitude = readLongitude(split[6], split[7], split[8]);
+                Altitude altitude = readAltitude(split[9]);
+
+                CoordinateWorld3D position = new CoordinateWorld3D(latitude, longitude, altitude);
+
+                componentNavaidAirway = new ComponentNavaidAirway(id, navaids.get(navId1), position);
+                overlay.addNavaid(componentNavaidAirway);
+                navaids.put(id, componentNavaidAirway);
+            }
+
+            else if (type.equalsIgnoreCase("NN")) {
+                String navId1 = split[2];
+                String navId2 = split[3];
+
+                componentNavaidAirway = new ComponentNavaidAirway(id, navaids.get(navId1), navaids.get(navId2));
+                overlay.addNavaid(componentNavaidAirway);
+                navaids.put(id, componentNavaidAirway);
+            }
+
 
             if(scanner.hasNextLine())
                 line = scanner.nextLine();
             else
                 line = "";
+
         }
+
+
     }
 }
