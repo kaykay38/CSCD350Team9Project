@@ -1,19 +1,16 @@
 package atcsim.loader.navaid;
 
 import atcsim.graphics.view.navigation.OverlayNavigation;
-import atcsim.loader.A_Loader;
 import atcsim.world.navigation.A_ComponentNavaid;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertNotNull;
 
 public class LoaderAirwayTests {
     HashMap<String, A_ComponentNavaid<?>> navaids;
@@ -30,7 +27,7 @@ public class LoaderAirwayTests {
         OverlayNavigation overlayNavigation = new OverlayNavigation(id);
         LoaderAirway loader = new LoaderAirway(navaids, overlayNavigation);
 
-        assertNotNull(loader);
+        Assertions.assertNotNull(loader);
     }
 
     @Test
