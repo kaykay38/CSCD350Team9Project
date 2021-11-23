@@ -67,6 +67,7 @@ public class LoaderAirway extends A_Loader {
                     overlay.addNavaid(componentNavaidAirway);
                     navaids.put(id, componentNavaidAirway);
                 }
+                
                 else if (type.equalsIgnoreCase("NN")) {
                     String navId1 = split[2];
                     String navId2 = split[3];
