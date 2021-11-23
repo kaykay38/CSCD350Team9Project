@@ -28,7 +28,7 @@ public class LoaderFix extends A_Loader {
 		String[] splitString;
 		
 		line = scanner.nextLine();
-		while(!(line.equals("\n"))) {
+		while(!(line.isEmpty())) {
 			
 			splitString = line.split(", ");
 			String id = splitString[ID];
