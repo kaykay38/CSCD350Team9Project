@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertNotNull;
-
 public class LoaderFixTests {
 
     OverlayNavigation overlay = new OverlayNavigation("1");
@@ -27,15 +25,20 @@ public class LoaderFixTests {
     @Test
     public void testLoad() throws IOException {
         String resourceName = "definition1.txt";
-        LoaderFix loaderFix = new LoaderFix(navaids,overlay);
-        String id = "fix1";
-        /** definition.txt
-        [NAVAIDS:FIX]
-        fix1, 48,38,31, 116,24,29, 1949
-        */
         Scanner scanner = new Scanner(new FileInputStream(resourceName));
+        String line = scanner.nextLine();
+        while(!line.matches("\\[NAVAID:FIX]") && scanner.hasNextLine()) {
+            line = scanner.nextLine();
+        }
+
+        /* definition.txt
+         [NAVAIDS:FIX]
+         fix1, 48,38,31, 116,24,29, 1949
+         */
+        LoaderFix loaderFix = new LoaderFix(navaids,overlay);
+        String[] ids = {"fix1"};
         loaderFix.load(scanner);
-        System.out.println("testLoad: "+navaids.get(id));
-        assertNotNull(navaids.get(id));
+        System.out.println("testFixLoad: "+ navaids.get(ids[0]));
+        Assertions.assertNotNull(navaids.get(ids[0]));
     }
 }
