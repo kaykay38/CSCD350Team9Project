@@ -51,13 +51,18 @@ public class DatatypeTester {
 
     @Test
     public void testAttitudePitch() {
-        AttitudePitch pitch = new AttitudePitch(10);
+        AttitudePitch p = new AttitudePitch(10);
         /* Verify:
         * 0 + p is correct.
         * 90 + p is correct.
         * 175 + p is correct.
         */
-
+        AttitudePitch p0 = new AttitudePitch(0);
+        AttitudePitch p90 = new AttitudePitch(90);
+        AttitudePitch p175 = new AttitudePitch(175);
+        assertEquals("0 + p", 10.0, p0.add_(p), .0001);
+        assertEquals("90 + p", 100.0, p90.add_(p), .0001);
+        assertEquals("175 + p", 5.0, p175.add_(p), .0001);
     }
 
     @Test
@@ -78,13 +83,19 @@ public class DatatypeTester {
 
     @Test
     public void testCourse() {
-        Course course = new Course(10);
+        Course c = new Course(10);
         /* Verify:
          * 0 + c is correct.
          * 355 + c is correct.
          * 0 - c is correct.
          * 355 - c is correct.
          */
+        Course c0 = new Course(0);
+        Course c355 = new Course(355);
+        assertEquals("0 + c", 10.0, c0.add_(c), .0001);
+        assertEquals("355 + c", 5.0, c355.add_(c), .0001);
+        assertEquals("0 - c", 350.0, c0.subtract_(c), .0001);
+        assertEquals("355 - c", 345.0, c355.subtract_(c), .0001);
 
     }
 
