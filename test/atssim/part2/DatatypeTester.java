@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+
 public class DatatypeTester {
 
     @Test
@@ -25,8 +26,8 @@ public class DatatypeTester {
         assertEquals("a1 - a2", 800.0, a1.subtract_(a2).getValue_(), .0001);
         assertEquals("a2 - a1", -800.0, a2.subtract_(a1).getValue_(), .0001);
         assertEquals("a1 = a1", 0, a1.compareTo(a1));
-        assertEquals("a1 < a2", -1, a2.compareTo(a1));
-        assertEquals("a1 > a2", 1, a1.compareTo(a2));
+        assertEquals("a1 < a2", 1, a1.compareTo(a2));
+        assertEquals("a2 > a1", -1, a2.compareTo(a1));
     }
 
     @Test
@@ -63,17 +64,21 @@ public class DatatypeTester {
     @Test
     public void testAttitudeYaw() {
         AttitudeYaw y = new AttitudeYaw(10);
+        AttitudeYaw test1 = new AttitudeYaw(-5);
+        AttitudeYaw test2 = new AttitudeYaw(175);
+        AttitudeYaw test3 = new AttitudeYaw(-175);
+        AttitudeYaw test4 = new AttitudeYaw(5);
 
         /* Verify:
-         * 0 + y is correct.
-         * 355 + y is correct.
-         * 0 - y is correct.
-         * 355 - y is correct.
+         * -5 + y is correct.
+         * 175 + y is correct.
+         * 5 - y is correct.
+         * -175 - y is correct.
          */
-        assertEquals("0 + y", 10.0, 0 + y.getValue_(), .0001);
-        assertEquals("355 + y", 365.0, 355 + y.getValue_(), .0001);
-        assertEquals("0 - y", -10.0, 0 - y.getValue_(), .0001);
-        assertEquals("355 - y", 345.0, 355 - y.getValue_(), .0001);
+        assertEquals("-5 + y", 5.0, test1.add_(y).getValue_(), .0001);
+        assertEquals("175 + y", -175.0, test2.add_(y).getValue_(), .0001);
+        assertEquals("5 - y", -5.0, test4.subtract_(y).getValue_(), .0001);
+        assertEquals("-175 - y", 175.0, test3.subtract_(y).getValue_(), .0001);
     }
 
     @Test
