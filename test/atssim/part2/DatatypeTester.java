@@ -121,8 +121,12 @@ public class DatatypeTester {
         //p1 + p2 lat SHOULD be (49 + 1 = 50 N, 39 + 2 = 41, 32 + 3 = 35)
         //p1 + p2 long SHOULD be (117 + 3 = 120 W, 25 + 2 = 27, 30 + 1 = 31)
         assertEquals("p1 = p1", 0, p1.compareTo(p1));
-        assertEquals("degrees=50 N minutes=41 seconds=35.0", p1.add_(p2).getLatitude().toString());
-        assertEquals("degrees=120 W minutes=27 seconds=31.0", p1.add_(p2).getLongitude().toString());
+        assertEquals(50.0, p1.add_(p2).getLatitude().getDegrees(),.0001);
+        assertEquals(41.0, p1.add_(p2).getLatitude().getMinutes(), .0001);
+        assertEquals(35.0, p1.add_(p2).getLatitude().getSeconds(), .0001);
+        assertEquals(120.0, p1.add_(p2).getLongitude().getDegrees(),.0001);
+        assertEquals(27.0, p1.add_(p2).getLongitude().getMinutes(), .0001);
+        assertEquals(31.0, p1.add_(p2).getLongitude().getSeconds(), .0001);
     }
 
     @Test
