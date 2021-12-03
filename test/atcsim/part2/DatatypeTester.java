@@ -1,4 +1,4 @@
-package atssim.part2;
+package atcsim.part2;
 
 import atcsim.datatype.*;
 import org.junit.Test;
