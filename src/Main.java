@@ -1,18 +1,17 @@
 import atcsim.graphics.view.navigation.OverlayNavigation;
 import atcsim.loader.NavigationOverlayBuilder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class Main {
     public static void main(String[] args) {
-        NavigationOverlayBuilder navOverlayBuilder = new NavigationOverlayBuilder();
+        
+    	NavigationOverlayBuilder navOverlayBuilder = new NavigationOverlayBuilder();
+        
         try {
-            InputStream inputStream = new FileInputStream(args[0]);
-
-            OverlayNavigation overlayNavigation = navOverlayBuilder.loadDefinition("");
+            OverlayNavigation overlayNavigation = navOverlayBuilder.loadDefinition("definition1.txt");
         }
+        
         catch (IOException ioException) {
             System.out.println(ioException);
         }
