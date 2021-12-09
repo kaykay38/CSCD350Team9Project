@@ -147,7 +147,7 @@ UA415 turn right to 090
 \subsection{Test 6: Simple Speed Change}
 Instruct UA415 to increase speed to 200 knots (entered as 20).
 \begin{enumerate}\itemsep-.15cm
-\item This test verifies that the \verb!increase speed! command correctly increases the speed of the aircraft.
+\item This test verifies that the \verb!increase speed! command correctly increases the speed of the aircraft so that the aircraft can change speed for basic maneuvering.
 \item The aircraft UA415 starts flying North, then the speed is increased to 200 knots.
 \item \verb!UA415 increase speed to 20!
 \item The plane will change speed to the new increased speed and continue at the new speed of 200 knots until it arrives.
@@ -161,7 +161,7 @@ Instruct UA415 to increase speed to 200 knots (entered as 20).
 \subsection{Test 7: Compound Speed Change}
 Instruct UA415 to increase speed to 250 knots, then upon arriving reduce speed to 100.
 \begin{enumerate}\itemsep-.15cm
-\item This test verifies multiple speed changes can be executed and that \verb!reduce speed! can correctly reduce the speed of the aircraft.
+\item This test verifies multiple speed changes can be executed and that \verb!reduce speed! can correctly reduce the speed of the aircraft for basic maneuvering.
 \item The aircraft \verb!UA415! will start flying north traveling at a constant speed, then the speed will increase to 250 knots, then the speed will decrease to 100 knots.
 \item \begin{verbatim}
 UA415 increase speed to 25
@@ -178,7 +178,7 @@ UA415 reduce speed to 10
 \subsection{Test 8: Descending Turn}
 Instruct UA415 to climb to flight level 240 to start the test (ignore this setup in the results). Upon arriving, descend to 8,000 feet while turning left to 010.
 \begin{enumerate}\itemsep-.15cm
-\item This test verifies that the \verb!descend!, \verb!turn! commands will accurately direct the aircraft to descend into a left turn.
+\item This test verifies that the \verb!descend! and \verb!turn! commands will accurately direct the aircraft to descend into a left turn for basic navigation.
 \item The aircraft \verb!UA415! will be flying north climbing at a constant speed to flight level 240. 
 \item \begin{verbatim}
 UA415 climb and maintain 240
@@ -190,38 +190,44 @@ UA415 descend and mantain 8000
 \item \includegraphics[scale=.4,valign=t,center]{test8.png}
 \item The actual is generally expected, however the aircraft attempted to turn right as well.
 \itemsep-.15cm
-\item 
+\item This test can be extended by adding another turn or descend or climb again in the case of avoiding obstacles.
 \end{enumerate}
 
 \subsection{Test 9: Turn Radius Comparison}
-This involves three independent tests with combined results. Use Excel for a top-view plot.\\
 9a. Instruct UA415 to turn right to 270.\\
 9b. Instruct UA415 to turn right to 270 and increase speed to 30.\\
 9c. Instruct UA415 to turn right to 270 and increase speed to 50.
 \begin{enumerate}\itemsep-.15cm
-\item The rationale behind the test; i.e., what is it testing and why we care.
+\item This test verifies turn accuracy when a turn radius is specified. We want to see correct behaviour when given a turn direction and radius as well a speed change to examine how the speed affects the turn radius. This is important for maneuvering the aircraft accurately and precisely.
 \item A general English description of the conditions of the test.
-\item The commands for (2), which must appear in a standalone form that could be directly copied into a text file to reproduce the test without manual intervention. Do not cross-reference tests; instead, repeat duplicated code.
-\item An English narrative of the expected results of executing the test. Consider this before running the test.
+\item \begin{enumerate}
+    \item[9a.] \verb!UA415 turn right to 270!
+    \item[9b.] \verb!UA415 turn right to 270!\\
+        \verb!UA415 increase speed to 30!
+    \item[9c.] \verb!UA415 turn right to 270!\\
+        \verb!UA415 increase speed to 50!\\
+    \end{enumerate}
+\item The aircraft will turn to the right to 270. As the speed increases, the turn radius should increase.
 \itemsep-.01cm
-% \item \includegraphics[scale=.3,valign=t,center]{test9.png}
-\item A brief discussion on how the actual results differ from the expected results, if they differ.
+\item 9a. \includegraphics[scale=.35,valign=t]{test9_a.png} 9b.\includegraphics[scale=.35,valign=t]{test9_b.png}\\
+9c. \includegraphics[scale=.35,valign=t]{test9_c.png}
+\item The actual results are mostly as expected. The turn radius of test 9c, increasing the speed to 50, did increase the turn radius from the previous test that increased the speed to 30. The turn radius of the initial test is surprisingly larger than when the speed is increased to 30.
 \itemsep-.15cm
-\item A suggestion for how to extend this test to cover related aspects not required here.
+\item This test can be extended by also comparing \verb!reduce speed!.
 \end{enumerate}
 
 \subsection{Test 10: Proceed to Fix, Level}
 Instruct UA415 to proceed to fix NDB4.
 \begin{enumerate}\itemsep-.15cm
-\item The rationale behind the test; i.e., what is it testing and why we care.
-\item A general English description of the conditions of the test.
-\item The commands for (2), which must appear in a standalone form that could be directly copied into a text file to reproduce the test without manual intervention. Do not cross-reference tests; instead, repeat duplicated code.
-\item An English narrative of the expected results of executing the test. Consider this before running the test.
+\item This test verifies that the \verb!proceed! to fix command accurately directs the aircraft to the correct fix so the aircraft can follow controller instructions.
+\item The aircraft will start flying north, then head toward NDB4.
+\item \verb!UA415 proceed to ndb4!
+\item The aircraft will navigate toward NDB4 upon issuance of the command.
 \itemsep-.01cm
-% \item \includegraphics[scale=.3,valign=t,center]{test10.png}
-\item A brief discussion on how the actual results differ from the expected results, if they differ.
+\item \includegraphics[scale=.3,valign=t]{test10_1.png}\includegraphics[scale=.5,valign=t]{test10_2.png}
+\item The actual results are as expected.
 \itemsep-.15cm
-\item A suggestion for how to extend this test to cover related aspects not required here.
+\item This test can be extended by adding another fix to the route.
 \end{enumerate}
 
 \subsection{Test 11: Proceed to Fix, Climbing}
